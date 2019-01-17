@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_reset_extra_printf.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 14:04:41 by akremer           #+#    #+#             */
-/*   Updated: 2018/12/29 12:26:53 by akremer          ###   ########.fr       */
+/*   Created: 2019/01/17 11:36:38 by akremer           #+#    #+#             */
+/*   Updated: 2019/01/17 13:42:59 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+#include "includes/ft_printf.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include "libft.h"
-
-int			get_next_line(const int fd, char **line);
-
-#endif
+void			ft_reset_extra_printf(t_printf *using)
+{
+	free(using->extra);
+	if (!(using->extra = (t_extra*)malloc(sizeof(t_extra))))
+		return ;
+	if (!(using->extra->more = (t_more*)malloc(sizeof(t_more))))
+		return ;
+}

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_zero_printf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 14:04:41 by akremer           #+#    #+#             */
-/*   Updated: 2018/12/29 12:26:53 by akremer          ###   ########.fr       */
+/*   Created: 2019/01/17 12:16:28 by akremer           #+#    #+#             */
+/*   Updated: 2019/01/17 12:26:19 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+#include "includes/ft_printf.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include "libft.h"
-
-int			get_next_line(const int fd, char **line);
-
-#endif
+void		ft_zero_printf(t_printf *using, va_list ap)
+{
+	using->extra->zero = 0;
+	using->index++;
+	while (using->str[using->index] >= '0' && using->str[using->index] <= '9')
+	{
+		using->extra->zero *= 10 + using->str[using->index] - 48;
+		using->index++;
+	}
+	ft_flags_printf(using, ap);
+}

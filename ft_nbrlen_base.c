@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_nbrlen_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 14:04:41 by akremer           #+#    #+#             */
-/*   Updated: 2018/12/29 12:26:53 by akremer          ###   ########.fr       */
+/*   Created: 2019/01/17 13:21:00 by akremer           #+#    #+#             */
+/*   Updated: 2019/01/17 13:44:57 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+#include "includes/libft.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include "libft.h"
+int		ft_nbrlen_base(unsigned long long n, char signe, int ba)
+{
+	int i;
+	unsigned long long base;
 
-int			get_next_line(const int fd, char **line);
-
-#endif
+	base = (unsigned long long)ba;
+	i = 0;
+	if (signe == 1)
+		i++;
+	while (n > base)
+	{
+		n = n / base;
+		i++;
+	}
+	return (i + 1);
+}

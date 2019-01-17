@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 14:04:41 by akremer           #+#    #+#             */
-/*   Updated: 2018/12/29 12:26:53 by akremer          ###   ########.fr       */
+/*   Created: 2018/12/29 17:53:20 by akremer           #+#    #+#             */
+/*   Updated: 2019/01/04 10:51:18 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+#include "includes/libft.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include "libft.h"
+void		ft_putnbr_baseA(unsigned int nb)
+{
+	char ba[16];
 
-int			get_next_line(const int fd, char **line);
-
-#endif
+	ba[0] = '0';
+	ba[1] = '1';
+	ba[2] = '2';
+	ba[3] = '3';
+	ba[4] = '4';
+	ba[5] = '5';
+	ba[6] = '6';
+	ba[7] = '7';
+	ba[8] = '8';
+	ba[9] = '9';
+	ba[10] = 'a';
+	ba[11] = 'b';
+	ba[12] = 'c';
+	ba[13] = 'd';
+	ba[14] = 'e';
+	ba[15] = 'f';
+	ft_putstr("0x");
+	if (nb >= 16)
+		ft_putnbr_baseA(nb / 16);
+	ft_putchar(ba[nb % 16]);
+}

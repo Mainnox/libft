@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr_printf.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 14:04:41 by akremer           #+#    #+#             */
-/*   Updated: 2018/12/29 12:26:53 by akremer          ###   ########.fr       */
+/*   Created: 2019/01/04 12:40:43 by akremer           #+#    #+#             */
+/*   Updated: 2019/01/17 13:15:59 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+#include "includes/ft_printf.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include "libft.h"
-
-int			get_next_line(const int fd, char **line);
-
-#endif
+void			ft_putnbr_printf(va_list ap, t_printf *using)
+{
+	if (using->extra->size == 1)
+		ft_set_signed_1(ap, using);
+	else if (using->extra->size == 2)
+		ft_set_signed_2(ap, using);
+	else if (using->extra->size == 3)
+		ft_set_signed_3(ap, using);
+	else if (using->extra->size == 4)
+		ft_set_signed_4(ap, using);
+	else
+		ft_set_signed_0(ap, using);
+	using->index++;
+}
