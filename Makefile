@@ -6,7 +6,7 @@
 #    By: akremer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:38:05 by akremer           #+#    #+#              #
-#    Updated: 2019/01/17 13:40:40 by akremer          ###   ########.fr        #
+#    Updated: 2019/03/19 08:45:36 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRC =	ft_atoi.c				\
 		ft_isalpha.c			\
 		ft_isdigit.c			\
 		ft_isalnum.c			\
-		ft_nbrlen_base.c		\
 		ft_isascii.c			\
 		ft_isprint.c			\
 		ft_toupper.c			\
@@ -82,51 +81,24 @@ SRC =	ft_atoi.c				\
 		ft_strclen.c			\
 		ft_realloc.c			\
 		get_next_line.c			\
+		ft_atoi_printf.c		\
+		ft_flags_printf.c		\
+		ft_nbrlen.c				\
+		ft_plus.c				\
+		ft_print_c.c			\
+		ft_print_flags.c		\
+		ft_print_s.c			\
+		ft_print_gx.c			\
+		ft_print_nbr.c			\
+		ft_print_pc.c			\
+		ft_print_printf.c		\
+		ft_print_signed.c		\
+		ft_print_u.c			\
 		ft_printf.c				\
-		ft_putnbr_baseG.c		\
-		ft_putnbr_baseA.c		\
-		ft_putnbr_base.c		\
-		ft_putchar_printf.c	\
-		ft_putchar_puissant_printf.c \
-		ft_putnbr_printf.c \
-		ft_putnbr_base_printf.c \
-		ft_putnbr_baseG_printf.c \
-		ft_putnbr_baseA_printf.c	\
-		ft_inistruct_printf.c	\
-		ft_putlong_base_printf.c		\
-		ft_putlong_baseG_printf.c	\
-		ft_putlonglong_base_printf.c	\
-		ft_putlonglong_baseG_printf.c	\
-		ft_flags_hl_printf.c					\
-		ft_flags_printf.c						\
-		ft_putlonglong_base.c					\
-		ft_putfloat_printf.c					\
-		ft_nbrlen.c								\
-		ft_set_unsigned_0.c						\
-		ft_set_unsigned_1.c						\
-		ft_set_unsigned_2.c						\
-		ft_set_unsigned_3.c						\
-		ft_set_unsigned_4.c						\
-		ft_print_printf.c						\
-		ft_putunsigned_printf.c					\
-		ft_set_base_0.c							\
-		ft_set_base_1.c							\
-		ft_set_base_2.c							\
-		ft_set_base_3.c							\
-		ft_set_base_4.c							\
-		ft_set_baseG_0.c						\
-		ft_set_baseG_1.c						\
-		ft_set_baseG_2.c						\
-		ft_set_baseG_3.c						\
-		ft_set_baseG_4.c						\
-		ft_set_signed_0.c						\
-		ft_set_signed_1.c						\
-		ft_set_signed_2.c						\
-		ft_set_signed_3.c						\
-		ft_set_signed_4.c						\
-		ft_hashtag_printf.c						\
-		ft_reset_extra_printf.c					\
-		ft_zero_printf.c
+		ft_putfloat_printf.c	\
+		ft_set_1.c				\
+		ft_set_2.c				\
+		ft_set_size.c			
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -134,7 +106,7 @@ FLAGS = -Wall -Werror -Wextra -I
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	@echo "Compilation:"
 	@gcc $(FLAGS) $(INCLUDES) -c $(SRC)
 	@ar rc $(NAME) $(OBJ)
@@ -171,5 +143,12 @@ propre: clean
 	@echo "Tout propre:"
 	@rm -rf a.*
 	@echo "Done"
+
+save: propre
+	@git status
+	@git add *
+	@git commit -m "Sauvegarde auto"
+	@git push
+	@git status
 
 .PHONY: clean fclean all re propre debugg $(NAME) test

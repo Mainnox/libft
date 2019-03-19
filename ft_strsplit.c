@@ -6,11 +6,11 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 15:15:11 by akremer           #+#    #+#             */
-/*   Updated: 2018/11/14 11:34:49 by akremer          ###   ########.fr       */
+/*   Updated: 2019/03/19 08:42:44 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static int		compte_mot(char *str, char c)
 {

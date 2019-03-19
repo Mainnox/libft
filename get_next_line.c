@@ -6,11 +6,11 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 14:36:45 by akremer           #+#    #+#             */
-/*   Updated: 2018/12/29 12:07:46 by akremer          ###   ########.fr       */
+/*   Updated: 2019/03/19 08:43:08 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "includes/get_next_line.h"
 
 static int			full_line(char **scrap, char **line, int fd, int ret)
 {

@@ -5,80 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/29 11:38:33 by akremer           #+#    #+#             */
-/*   Updated: 2019/01/17 13:44:55 by akremer          ###   ########.fr       */
+/*   Created: 2019/03/08 10:00:57 by akremer           #+#    #+#             */
+/*   Updated: 2019/03/19 06:57:31 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include "libft.h"
-#include <stdarg.h>
-
-typedef struct	s_more
-{
-	char		plus;
-	int			moins;
-}				t_more;
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
 
 typedef struct	s_extra
 {
-	int 		precision;
-	char		size;
-	char		hashtag;
+	int			moins;
+	int			plus;
+	int			hastag;
+	int			precision;
+	int			blanck;
+	int			done;
+	int			width;
+	int			size;
 	int			zero;
-	t_more		*more;
 }				t_extra;
 
 typedef struct	s_printf
 {
+	int			i;
 	const char	*str;
-	int			index;
 	int			nbprint;
+	va_list		ap;
 	t_extra		*extra;
 }				t_printf;
 
-int				ft_printf(const char *s, ...);
-void			ft_printf_tab(va_list ap);
-void			ft_putchar_printf(char c, t_printf *using);
-void			ft_putchar_puissant_printf(const char *str, t_printf *using);
-void			ft_putnbr_printf(va_list ap, t_printf *using);
-void			ft_putnbr_base_printf(va_list ap, int base, t_printf *using);
-void			ft_putnbr_baseG_printf(va_list ap, int base, t_printf *using);
-void			ft_putnbr_baseA_printf(void *p, t_printf *using);
-t_printf		*ft_inistruct_printf(const char *s);
-void			ft_flags_printf(t_printf *using, va_list ap);
-void			ft_putlong_base_printf(long nb, int base, t_printf *using);
-void			ft_putlong_baseG_printf(long nb, int base, t_printf *using);
-void			ft_putlonglong_base_printf(long long nb, int base, t_printf *using);
-void			ft_putlonglong_baseG_printf(long long nb, int base, t_printf *using);
-void			ft_flags_hl_printf(t_printf *using, va_list ap);
-void			ft_putfloat_printf(double f, t_printf *using);
-void			ft_set_signed_0(va_list ap, t_printf *using);
-void			ft_set_signed_1(va_list ap, t_printf *using);
-void			ft_set_signed_2(va_list ap, t_printf *using);
-void			ft_set_signed_3(va_list ap, t_printf *using);
-void			ft_set_signed_4(va_list ap, t_printf *using);
-void			ft_set_unsigned_0(va_list ap, t_printf *using);
-void			ft_set_unsigned_1(va_list ap, t_printf *using);
-void			ft_set_unsigned_2(va_list ap, t_printf *using);
-void			ft_set_unsigned_3(va_list ap, t_printf *using);
-void			ft_set_unsigned_4(va_list ap, t_printf *using);
-void			ft_set_base_0(va_list ap, t_printf *using, int base);
-void			ft_set_base_1(va_list ap, t_printf *using, int base);
-void			ft_set_base_2(va_list ap, t_printf *using, int base);
-void			ft_set_base_3(va_list ap, t_printf *using, int base);
-void			ft_set_base_4(va_list ap, t_printf *using, int base);
-void			ft_set_baseG_0(va_list ap, t_printf *using, int base);
-void			ft_set_baseG_1(va_list ap, t_printf *using, int base);
-void			ft_set_baseG_2(va_list ap, t_printf *using, int base);
-void			ft_set_baseG_3(va_list ap, t_printf *using, int base);
-void			ft_set_baseG_4(va_list ap, t_printf *using, int base);
-void			ft_print_printf(t_printf *using, va_list ap);
-void			ft_putunsigned_printf(va_list ap, t_printf *using);
-void			ft_hashtag_printf(t_printf *using, va_list ap);
-void			ft_reset_extra_printf(t_printf *using);
-void			ft_zero_printf(t_printf *using, va_list ap);
-
+void			ft_putchar_printf(t_printf *h);
+void			ft_flags_printf(t_printf *h);
+int				ft_atoi_printf(t_printf *h);
+int				ft_nbrlen(unsigned long long nb, char signe, unsigned int ba);
+void			ft_set_moins(t_printf *h);
+void			ft_set_blanck(t_printf *h);
+void			ft_set_precision(t_printf *h);
+void			ft_set_zero(t_printf *h);
+void			ft_set_width(t_printf *h);
+void			ft_set_plus(t_printf *h);
+void			ft_set_hastag(t_printf *h);
+void			ft_set_star(t_printf *h);
+void			ft_set_size(t_printf *h);
+int				ft_printf(const char *str, ...);
+void			ft_print_printf(t_printf *h);
+void			ft_print_c(t_printf *h, unsigned *c);
+void			ft_print_while(t_printf *h, int len, char c);
+int				ft_strlen(char *str);
+void			ft_print_str(t_printf *h, char *str);
+void			ft_print_s(t_printf *h, unsigned *s);
+void			ft_print_signed(t_printf *h, int base);
+void			ft_print_unsigned(t_printf *h, unsigned int base);
+void			ft_print_gx(t_printf *h, unsigned int base);
+void			ft_print_hastag(t_printf *h, char c, unsigned int ba);
+int				ft_cal_nbdisplay(t_printf *h, int len,
+		unsigned int ba, unsigned long long nb);
+int				ft_cal_p(t_printf *h, int len, char c, unsigned int ba);
+int				ft_cal_nbdisplay_signed(t_printf *h, int len, char signe);
+void			ft_print_signe(t_printf *h, char signe);
+void			ft_print_pc(t_printf *h);
+void			ft_print_char(t_printf *h, char c);
+void			ft_display_unsigned(t_printf *h, char *base,
+		unsigned int ba, unsigned long long nb);
+void			ft_f_u(t_printf *h, char *base,
+		unsigned int ba, unsigned long long nb);
+void			ft_f_s(t_printf *h, char *base
+		, unsigned int ba, long long nb);
+void			ft_flags_gx(t_printf *h, char *base,
+		unsigned int ba, unsigned long long nb);
+void			ft_print_float(t_printf *h);
 #endif

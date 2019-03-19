@@ -5,24 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/07 17:29:53 by akremer           #+#    #+#             */
-/*   Updated: 2019/01/17 08:27:35 by akremer          ###   ########.fr       */
+/*   Created: 2019/02/27 10:08:45 by akremer           #+#    #+#             */
+/*   Updated: 2019/03/19 08:39:31 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "includes/ft_printf.h"
 
-int		ft_nbrlen(unsigned long long n, char signe)
+int			ft_nbrlen(unsigned long long nb, char signe, unsigned int ba)
 {
-	int i;
+	int ret;
 
-	i = 0;
+	ret = 1;
 	if (signe == 1)
-		i++;
-	while (n > 10)
+		ret++;
+	while (nb >= ba)
 	{
-		n = n / 10;
-		i++;
+		nb /= ba;
+		ret++;
 	}
-	return (i + 1);
+	return (ret);
 }

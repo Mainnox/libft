@@ -5,60 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/29 12:45:04 by akremer           #+#    #+#             */
-/*   Updated: 2019/01/17 11:10:14 by akremer          ###   ########.fr       */
+/*   Created: 2019/03/08 09:59:53 by akremer           #+#    #+#             */
+/*   Updated: 2019/03/19 08:40:12 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 
-/*static void		ft_flags(t_printf *using, va_list ap)
+static int				ft_reset_extra(t_printf *h)
 {
-	if (using->str[using->index] == '%')
-		using->index++;
-	if (using->str[using->index] == 'c')
-	 	ft_putchar_printf(va_arg(ap, int), using);
-	if (using->str[using->index] == 's')
-		ft_putchar_puissant_printf(va_arg(ap, char*), using);
-	if (using->str[using->index] == 'd' || using->str[using->index] == 'i' || using->str[using->index] == 'u')
-		ft_putnbr_printf(va_arg(ap, int), using);
-	if (using->str[using->index] == 'o')
-		ft_putnbr_base_printf(va_arg(ap, int), 8, using);
-	if (using->str[using->index] == 'x')
-		ft_putnbr_base_printf(va_arg(ap, int), 16, using);
-	if (using->str[using->index] == 'X')
-		ft_putnbr_baseG_printf(va_arg(ap, int), 16, using);
-	if (using->str[using->index] == 'p')
-		ft_putnbr_baseA_printf(va_arg(ap, void*), using);
-//	if (using->str[i] == 'h')
-//		j += ft_checkh_printf(using->str, i, ap, j);
-//	if (using->str[i] == 'l')
-//		j += ft_checkl_printf(using->str, i, ap, j);
-}*/
+	if (h->extra)
+		free(h->extra);
+	if (!(h->extra = (t_extra *)malloc(sizeof(t_extra))))
+		return (0);
+	h->extra->plus = -1;
+	h->extra->moins = -1;
+	h->extra->hastag = -1;
+	h->extra->precision = -1;
+	h->extra->blanck = -1;
+	h->extra->done = -1;
+	h->extra->width = -1;
+	h->extra->size = -1;
+	h->extra->zero = -1;
+	return (1);
+}
 
-int			ft_printf(const char *s, ...)
+static t_printf			*ft_create_struct(const char *format)
 {
-	va_list		ap;
-	t_printf	*using;
+	t_printf *h;
 
-	using = ft_inistruct_printf(s);
-	va_start(ap, s);
-	while (using->str[using->index])
+	if (!(h = (t_printf *)malloc(sizeof(t_printf))))
+		return (NULL);
+	h->str = format;
+	h->i = 0;
+	h->nbprint = 0;
+	h->extra = NULL;
+	if (!ft_reset_extra(h))
+		return (NULL);
+	return (h);
+}
+
+int						ft_printf(const char *format, ...)
+{
+	t_printf	*h;
+
+	h = ft_create_struct(format);
+	va_start(h->ap, format);
+	if (h == NULL)
+		return (-1);
+	while (h->str[h->i])
 	{
-		if (using->str[using->index] == '\\')
+		if (h->str[h->i] == '%')
 		{
-			ft_putchar(using->str[using->index + 1]);
+			h->i++;
+			ft_flags_printf(h);
+			if (!ft_reset_extra(h))
+				return (-1);
 			continue ;
 		}
-		if (using->str[using->index] == '%')
-		{
-			ft_flags_printf(using, ap);
-			continue ;
-		}
-		ft_putchar(using->str[using->index]);
-		using->index++;
+		ft_putchar_printf(h);
 	}
-	va_end(ap);
-	free(using);
-	return (using->nbprint + using->index);
+	free(h->extra);
+	free(h);
+	va_end(h->ap);
+	return (h->nbprint);
 }
