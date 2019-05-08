@@ -22,9 +22,8 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int					ft_nbrlen_base(unsigned long long nb, char signe, int base);
 void				ft_putlonglong_base(long long nb, int base);
-int					ft_nbrlen(unsigned long long n, char signe);
+int					ft_nbrlen(unsigned long long n, char signe, unsigned int ba);
 void				ft_putnbr_baseG(int nb, int size);
 void				ft_putnbr_baseA(unsigned int nb);
 void				ft_putnbr_base(int nb, int size);

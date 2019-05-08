@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include "libft.h"
 
 typedef struct	s_extra
 {
@@ -56,7 +57,6 @@ int				ft_printf(const char *str, ...);
 void			ft_print_printf(t_printf *h);
 void			ft_print_c(t_printf *h, unsigned *c);
 void			ft_print_while(t_printf *h, int len, char c);
-int				ft_strlen(char *str);
 void			ft_print_str(t_printf *h, char *str);
 void			ft_print_s(t_printf *h, unsigned *s);
 void			ft_print_signed(t_printf *h, int base);

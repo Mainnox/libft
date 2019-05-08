@@ -86,6 +86,7 @@ SRC =	ft_atoi.c				\
 		ft_nbrlen.c				\
 		ft_plus.c				\
 		ft_print_c.c			\
+		ft_putchar_printf.c		\
 		ft_print_flags.c		\
 		ft_print_s.c			\
 		ft_print_gx.c			\
