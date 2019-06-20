@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 14:36:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/06/20 16:03:40 by akremer          ###   ########.fr       */
+/*   Updated: 2019/06/20 16:18:29 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int			full_line(char **scrap, char **line, int fd, int ret)
 		i++;
 	if (scrap[fd][i] == '\n')
 	{
-		*line = ft_strndup(scrap[fd], i + 1);
-		tmp = ft_strdup(scrap[fd] + i + 2);
+		*line = ft_strndup(scrap[fd], i);
+		tmp = ft_strdup(scrap[fd] + i + 1);
 		free(scrap[fd]);
 		scrap[fd] = tmp;
 		if (scrap[fd][0] == '\0')
